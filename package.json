@@ -1,0 +1,23 @@
+{
+  "name": "tempelate-writer-every-language",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiritocode1/tempelate-writer-every-language.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kiritocode1/tempelate-writer-every-language/issues"
+  },
+  "homepage": "https://github.com/kiritocode1/tempelate-writer-every-language#readme",
+  "dependencies": {
+    "openai": "^3.2.1"
+  }
+}
