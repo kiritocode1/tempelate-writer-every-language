@@ -1,0 +1,47 @@
+okay say i want to create a react component with the tempelate below , create the component properly : ---
+
+
+dependencies:
+  - typescript : "5.0.1"
+  - tailwind
+  - prisma : "15.0.1"
+
+
+
+
+
+component-details:
+  name: PageName
+  description: A simple component that displays a peep's name  and a button to contact him/her. 
+  props:
+    - name: String || null 
+    - age : number ||null 
+    - description: String || null 
+
+assets : Null
+
+states: 
+- Flick  : false 
+
+globals : 
+- $user : google.auth.user
+
+
+
+
+
+
+Changes : 
+    - nice_btn.onClick(() =>Flick = !Flick )
+    - [Flick===true] : prisma.push({name + "matched with "+ $user})
+
+  implementation:
+    code: "
+    <div>{name}</div>
+    <h6>{age} </h6>
+    <h6>{description} </h6>
+    <button class="nice_btn">{Flick?'matched''Date me' }</button>
+    "
+
+
+--- 
