@@ -44,6 +44,12 @@ Changes :
 
 
 ---`
+import * as dotenv from "dotenv";
+
+dotenv.config();
+
+
+
 
 import * as fs from "fs"; 
 
@@ -55,9 +61,9 @@ fs.mkdir('./results', { recursive: true }, (err) => {
     if (err) throw err;
 });
 
-
+// GET THIS KEY FROM : https://platform.openai.com/account/api-keys
 const config = new Configuration({
-    apiKey: "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"
+    apiKey: process.env.OPENAI_API_KEY,
 }); 
 
 const openai = new OpenAIApi(config);
@@ -98,6 +104,7 @@ const logic = async ([ key, value ]) => {
             - assume all packages are installed with import statements not require statements. 
             - types shoud be strict , if you dont know types , do standard language implementation (like js) 
             - semicolons are required . 
+            -
          `,
         max_tokens: 3000,
         temperature: 0.1,
