@@ -117,35 +117,37 @@ const logic = async ([ key, value ]) => {
 
 
 
-    // //! new gpt code in paid version 
-    // openai.createChatCompletion(
-    //     {
-    //         model: "gpt-3.5-turbo",
-    //         messages: [
-    //             {
-    //                 role: "system", content: `you are like a compiler , that takes in a tempelate and returns the component exactly as it is , in ${key + value} file , there are a few things i want you to remember :  
-    //         IMPORTANT : 
-    //         - syntax
-    //         - indentation
-    //         - comments explaination
-    //         - assume all packages are installed with import statements not require statements. 
-    //         - types shoud be strict , if you dont know types , do standard language implementation (like js)  
+    //! new gpt code in paid version 
+    openai.createChatCompletion(
+        {
+            model: "gpt-3.5-turbo",
+            messages: [
+                {
+                    role: "system", content: `you are like a compiler , that takes in a tempelate and returns the component exactly as it is , in ${key + value} file , there are a few things i want you to remember :  
+            IMPORTANT : 
+            - syntax
+            - indentation
+            - comments explaination
+            - assume all packages are installed with import statements not require statements. 
+            - types shoud be strict , if you dont know types , do standard language implementation (like js)  
             
-    //                 `
-    //             }
-    //             , {
-    //                 role: "user",
-    //                 content: `
-    //                 tempelate : 
-    //     \n---\n
-    //      ${tempelate ?? res} 
-    //      \n---\n
-    //              and framework of choice is : ${key}.${value}
-    //                 `
-    //             }
-    //         ]
-    //     }
-    // ); 
+                    `
+                }
+                , {
+                    role: "user",
+                    content: `
+                    tempelate : 
+        \n---\n
+         ${tempelate ?? res} 
+         \n---\n
+                 and framework of choice is : ${key}.${value}
+                    `
+                }
+            ], 
+            temperature: 0.1, 
+            max_tokens : 4000
+        }
+    ); 
 
 
     const file_resp = result.data.choices[ 0 ].text;

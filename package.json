@@ -1,5 +1,6 @@
 {
   "name": "tempelate-writer-every-language",
+  "type": "module",
   "version": "1.0.0",
   "description": "a basic module powered by OpenAi's chat cpt to make many files with tempelate",
   "main": "index.js",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/kiritocode1/tempelate-writer-every-language#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
+    "gpt-3-encoder": "^1.1.4",
     "openai": "^3.2.1"
   }
 }
