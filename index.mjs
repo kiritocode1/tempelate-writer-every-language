@@ -77,15 +77,20 @@ const list_of_frameworks_dot_files_like_dot_jsx = {
     svelte: ".svelte",
     backbone: ".js",
     nuxt: ".vue",
-
     sapper: ".svelte",
     solid: ".js",
     astro: ".astro",
     sveltekit: ".svelte",
     rocket: ".rs",
     qwik: ".tsx",
-
 }; 
+
+// codewhisper ,  read tempelate.yaml in this file .
+
+const tempelate = fs.readFileSync('./tempelate.yaml', 'utf8');
+
+
+
 
 
 
@@ -94,7 +99,7 @@ const logic = async ([ key, value ]) => {
         model: "text-davinci-003",
         prompt: `make me a ${key + value} file with ${key}   framework and tempelate : 
         \n---\n
-         ${res} 
+         ${tempelate??res} 
          \n---\n
          in  the file and nothing else
          IMPORTANT : 
@@ -109,6 +114,40 @@ const logic = async ([ key, value ]) => {
         max_tokens: 3000,
         temperature: 0.1,
     });
+
+
+
+    // //! new gpt code in paid version 
+    // openai.createChatCompletion(
+    //     {
+    //         model: "gpt-3.5-turbo",
+    //         messages: [
+    //             {
+    //                 role: "system", content: `you are like a compiler , that takes in a tempelate and returns the component exactly as it is , in ${key + value} file , there are a few things i want you to remember :  
+    //         IMPORTANT : 
+    //         - syntax
+    //         - indentation
+    //         - comments explaination
+    //         - assume all packages are installed with import statements not require statements. 
+    //         - types shoud be strict , if you dont know types , do standard language implementation (like js)  
+            
+    //                 `
+    //             }
+    //             , {
+    //                 role: "user",
+    //                 content: `
+    //                 tempelate : 
+    //     \n---\n
+    //      ${tempelate ?? res} 
+    //      \n---\n
+    //              and framework of choice is : ${key}.${value}
+    //                 `
+    //             }
+    //         ]
+    //     }
+    // ); 
+
+
     const file_resp = result.data.choices[ 0 ].text;
 
     fs.writeFile(`./results/${key}${value}`, file_resp, function (err) {
@@ -116,7 +155,9 @@ const logic = async ([ key, value ]) => {
         console.log('Saved!', key, value);
     }
     );
+
 }; 
+
 
 
 
