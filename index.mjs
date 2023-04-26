@@ -41,8 +41,6 @@ Changes :
     <h6>{description} </h6>
     <button class="nice_btn">{Flick?'matched''Date me' }</button>
     "
-
-
 ---`
 import * as dotenv from "dotenv";
 
@@ -89,10 +87,13 @@ const list_of_frameworks_dot_files_like_dot_jsx = {
 
 const tempelate = fs.readFileSync('./tempelate.yaml', 'utf8');
 
-
-
-
-
+try {
+    const expected_frameworks = fs.readFileSync("./expected.json", 'utf-8');
+    console.log(expected_frameworks)
+} catch (err) {
+    const expected_frameworks = list_of_frameworks_dot_files_like_dot_jsx; 
+    console.log("dont worry lol, i will use the default list of frameworks")
+}; 
 
 const logic = async ([ key, value ]) => {
     const result = await openai.createCompletion({
@@ -118,36 +119,36 @@ const logic = async ([ key, value ]) => {
 
 
     //! new gpt code in paid version 
-    openai.createChatCompletion(
-        {
-            model: "gpt-3.5-turbo",
-            messages: [
-                {
-                    role: "system", content: `you are like a compiler , that takes in a tempelate and returns the component exactly as it is , in ${key + value} file , there are a few things i want you to remember :  
-            IMPORTANT : 
-            - syntax
-            - indentation
-            - comments explaination
-            - assume all packages are installed with import statements not require statements. 
-            - types shoud be strict , if you dont know types , do standard language implementation (like js)  
+    // const Result_3_turbo = await openai.createChatCompletion(
+    //     {
+    //         model: "gpt-3.5-turbo",
+    //         messages: [
+    //             {
+    //                 role: "system", content: `you are like a compiler , that takes in a tempelate and returns the component exactly as it is , in ${key + value} file , there are a few things i want you to remember :  
+    //         IMPORTANT : 
+    //         - syntax
+    //         - indentation
+    //         - comments explaination
+    //         - assume all packages are installed with import statements not require statements. 
+    //         - types shoud be strict , if you dont know types , do standard language implementation (like js)  
             
-                    `
-                }
-                , {
-                    role: "user",
-                    content: `
-                    tempelate : 
-        \n---\n
-         ${tempelate ?? res} 
-         \n---\n
-                 and framework of choice is : ${key}.${value}
-                    `
-                }
-            ], 
-            temperature: 0.1, 
-            max_tokens : 4000
-        }
-    ); 
+    //                 `
+    //             }
+    //             , {
+    //                 role: "user",
+    //                 content: `
+    //                 tempelate : 
+    //     \n---\n
+    //      ${tempelate ?? res} 
+    //      \n---\n
+    //              and framework of choice is : ${key}.${value}
+    //                 `
+    //             }
+    //         ], 
+    //         temperature: 0.1, 
+    //         max_tokens : 4000
+    //     }
+    // ); 
 
 
     const file_resp = result.data.choices[ 0 ].text;
@@ -167,5 +168,4 @@ const logic = async ([ key, value ]) => {
 
 
 
-    Object.entries(list_of_frameworks_dot_files_like_dot_jsx).forEach(async([ key, value ]) =>logic([ key, value ]));
-
+Object.entries(expected_frameworks).forEach(async ([ key, value ]) => logic([ key, value ]));
