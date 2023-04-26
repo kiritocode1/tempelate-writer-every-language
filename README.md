@@ -26,11 +26,14 @@
 
 ![keep the tempelate.yaml](tempelate.png)
 
-2. Another Optional file is ```expected.json``` also in root directory  ,  this is so that we can focus on the framworks that you want . here is another [example](./expected.json) of how an expected.json should look like . 
+
+--- 
+
+### 2. Another Optional file is ```expected.json``` also in root directory  ,  this is so that we can focus on the framworks that you want . here is another [example](./expected.json) of how an expected.json should look like . 
 
 ![expected explained here](./expected.png)
 
-3. Run  ``` node index.mjs``` and  look out for `/results` folder . this project is  still in beta , wait till we release version 1.0.0.  
+### 3. Run  ``` node index.mjs``` and  look out for `/results` folder . this project is  still in beta , wait till we release version 1.0.0.  
 ![node runner png](node.png) 
 
 ---
